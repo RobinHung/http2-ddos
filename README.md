@@ -7,7 +7,7 @@ This attack utilizes the attack script from [bennettaur's http2-ddos](https://gi
 ```
 docker pull robinhung/http2-express-server
 
-docker run -p 9876:3000 -d robinhung/http2-express-server
+docker run -p 9876:3000 --name=http-express-server -d robinhung/http2-express-server
 ```
 
 Now go to **https://localhost:9876** to connect to HTTP/2 express.js server.
@@ -48,3 +48,17 @@ During the attack, you can use `docker stats` to view the CPU usage has been inc
 ```
 docker stats $(docker ps | awk '{if(NR>1) print $NF}')
 ```
+
+## HTTP/2 Server with Express-Rate-Limit
+
+```
+cd http2-express-rate-limit
+
+docker build -t robinhung/http2-express-rate-limit .
+
+docker run -p 1234:3000 --name=rate-limit -d robinhung/http2-express-rate-limit
+```
+
+### Result
+
+Defense is NOT effective. Because the server is still taking all of the coming requests, but just instead return the status code 429 (Too many requests).
