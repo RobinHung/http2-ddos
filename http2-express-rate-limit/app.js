@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const rateLimit = require("express-rate-limit");
+// const Ddos = require("ddos");
 const port = 3000;
 
 const app = express();
@@ -19,9 +20,14 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
+// const ddos = new Ddos({ burst: 10, limit: 15 });
+
 app.get("*", (req, res) => {
+  // app.use(ddos.express);
   res.status(200).json({ message: "Hello HTTP/2!" });
 });
+
+// app.use(ddos.express);
 
 spdy.createServer(options, app).listen(port, error => {
   if (error) {

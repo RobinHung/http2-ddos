@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ddos": "^0.1.31",
     "express": "^4.16.4",
     "express-rate-limit": "^3.3.2",
     "spdy": "^4.0.0"
